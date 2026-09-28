@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="resources/icon.svg" />
+  <title>CRM: Реестр партнеров</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- MainWindow: главная форма со списком партнеров -->
+    <section id="mainWindow" class="window">
+      <div class="window__titlebar">
+        <img class="window__logo" src="resources/logo.svg" alt="Кофе и Приятности" />
+        <span class="window__title-text">CRM: Реестр партнеров</span>
+      </div>
+      <div class="window__body">
+        <div class="toolbar">
+          <button id="btnHistory" class="btn" disabled>История продаж</button>
+          <button id="btnAddPartner" class="btn btn--primary">Добавить партнера</button>
+        </div>
+        <ul id="partnerList" class="partner-list"></ul>
+      </div>
+    </section>
+
+    <!-- PartnerEditWindow: форма добавления/редактирования партнера -->
+    <section id="editWindow" class="window window--hidden">
+      <div class="window__titlebar">
+        <span id="editWindowTitle" class="window__title-text">CRM: Карточка партнера [Редактирование]</span>
+      </div>
+      <div class="window__body">
+        <form id="partnerForm" class="partner-form">
+          <label class="field">
+            <span class="field__label">Наименование</span>
+            <input type="text" id="fieldName" name="name" required />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Тип партнера</span>
+            <select id="fieldType" name="partnerType" required></select>
+          </label>
+
+          <label class="field">
+            <span class="field__label">Рейтинг</span>
+            <input type="number" id="fieldRating" name="rating" min="0" step="1" placeholder="0" />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Адрес</span>
+            <input type="text" id="fieldAddress" name="address" />
+          </label>
+
+          <label class="field">
+            <span class="field__label">ФИО директора</span>
+            <input type="text" id="fieldDirector" name="director" />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Телефон</span>
+            <input
+              type="text"
+              id="fieldPhone"
+              name="phone"
+              placeholder="+7 999 123-45-67"
+              title="Формат: +7 999 123-45-67"
+            />
+          </label>
+
+          <label class="field">
+            <span class="field__label">Email</span>
+            <input
+              type="text"
+              id="fieldEmail"
+              name="email"
+              placeholder="name@company.ru"
+              title="Формат: name@company.ru"
+            />
+          </label>
+
+          <div class="toolbar">
+            <button type="button" id="btnBack" class="btn">Назад</button>
+            <button type="submit" id="btnSave" class="btn btn--primary">Сохранить</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- PartnerHistoryWindow: история отгрузок выбранного партнера -->
+    <section id="historyWindow" class="window window--hidden">
+      <div class="window__titlebar">
+        <img class="window__logo" src="resources/logo.svg" alt="Кофе и Приятности" />
+        <span id="historyWindowTitle" class="window__title-text">CRM: История реализации продукции</span>
+      </div>
+      <div class="window__body">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Наименование продукции</th>
+              <th>Количество (шт.)</th>
+              <th>Дата продажи</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody"></tbody>
+        </table>
+        <div class="toolbar">
+          <button type="button" id="btnHistoryBack" class="btn">Назад</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Универсальный MessageBox: type задает иконку/цвет (error | warning | info) -->
+  <div id="messageBoxOverlay" class="messagebox-overlay messagebox-overlay--hidden">
+    <div class="messagebox" role="alertdialog" aria-modal="true">
+      <div class="messagebox__titlebar">
+        <span id="messageBoxIcon" class="messagebox__icon"></span>
+        <span id="messageBoxTitle" class="messagebox__title"></span>
+      </div>
+      <div class="messagebox__body">
+        <p id="messageBoxText" class="messagebox__text"></p>
+      </div>
+      <div class="messagebox__footer">
+        <button id="messageBoxCancel" class="btn messagebox__cancel">Отмена</button>
+        <button id="messageBoxOk" class="btn btn--primary">ОК</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

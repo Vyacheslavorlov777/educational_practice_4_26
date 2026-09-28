@@ -1,0 +1,9 @@
+{
+  "name": "material-calculator-unit-tests-and-security",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test --experimental-test-coverage materialCalculator.test.js"
+  }
+}
